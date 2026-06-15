@@ -6,7 +6,12 @@ import errorHandler from './middleware/errorHandler';
 
 const app = express();
 
-app.use(cors({ origin: process.env.FRONTEND_ORIGIN || 'http://localhost:5173' }));
+app.use(cors({
+  origin: process.env.FRONTEND_ORIGIN === '*'
+    ? '*'
+    : (process.env.FRONTEND_ORIGIN || 'http://localhost:5173'),
+  methods: ['GET', 'POST'],
+}));
 app.use(express.json({ limit: '10kb' }));
 
 // Handle malformed JSON bodies
