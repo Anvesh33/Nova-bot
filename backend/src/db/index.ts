@@ -6,7 +6,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const dbPath = process.env.DB_PATH || './data/chat.db';
-const dir = path.dirname(path.resolve(dbPath));
+const dir = path.dirname(path.resolve(process.cwd(), dbPath));
 fs.mkdirSync(dir, { recursive: true });
 
 const db = new DatabaseSync(dbPath);
